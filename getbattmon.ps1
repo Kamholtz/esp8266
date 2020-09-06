@@ -1,0 +1,1 @@
+pipenv run mpfshell -n -c "open com8; get battmon.py downloads/battmon.py"

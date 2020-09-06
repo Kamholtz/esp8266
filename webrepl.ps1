@@ -1,0 +1,1 @@
+pipenv run mpfshell -c "open ws:192.168.1.36,iopjkl"
