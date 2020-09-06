@@ -1,5 +1,6 @@
 import battmon
 # Complete project details at https://RandomNerdTutorials.com
+# https://randomnerdtutorials.com/micropython-esp32-esp8266-dht11-dht22-web-server/
 
 bm = battmon.BatteryMonitor()
 
@@ -12,6 +13,7 @@ def read_sensor():
     if (isinstance(solar_v, float) and isinstance(batt_v, float)) or (isinstance(solar_v, int) and isinstance(batt_v, int)):
       msg = (b'{0:3.1f},{1:3.1f}'.format(solar_v, batt_v))
 
+      solar_v = round(solar_v, 2)
       batt_v = round(batt_v, 2)
       return(msg)
     else:
@@ -42,18 +44,18 @@ def web_page():
   </style>
 </head>
 <body>
-  <h2>ESP DHT Server</h2>
+  <h2>Solar Charger Server</h2>
   <p>
-    <i class="fas fa-thermometer-half" style="color:#059e8a;"></i>
-    <span class="dht-labels">Temperature</span>
+    <i class="fas fa-solar-panel" style="color: orange;"></i>
+    <span class="dht-labels">Solar Panel Voltage</span>
     <span>"""+str(solar_v)+"""</span>
-    <sup class="units">&deg;C</sup>
+    <sup class="units">V</sup>
   </p>
   <p>
-    <i class="fas fa-tint" style="color:#00add6;"></i>
-    <span class="dht-labels">Humidity</span>
+    <i class="fas fa-battery-three-quarters" style="color: deepskyblue;"></i>
+    <span class="dht-labels">Battery Voltage</span>
     <span>"""+str(batt_v)+"""</span>
-    <sup class="units">%</sup>
+    <sup class="units">V</sup>
   </p>
 </body>
 </html>"""
