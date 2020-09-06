@@ -8,10 +8,10 @@ class BatteryMonitor:
     SOLAR_MAX_V = 6
 
     def __init__(self):
-        self.sela = Pin(3, Pin.OUT)
-        self.selb = Pin(10, Pin.OUT)
-        self.selc = Pin(9, Pin.OUT)
-        self.charge_en = Pin(5, Pin.OUT)
+        self.sela = Pin(5, Pin.OUT)
+        self.selb = Pin(4, Pin.OUT)
+        self.selc = Pin(14, Pin.OUT)
+        # self.charge_en = Pin(5, Pin.OUT)
         self.adc = ADC(0)
 
     def select_solar_panel(self) -> None:
