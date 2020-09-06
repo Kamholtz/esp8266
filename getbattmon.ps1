@@ -1,1 +1,1 @@
-pipenv run mpfshell -n -c "open com8; get battmon.py downloads/battmon.py"
+pipenv run mpfshell -n -c "open com8; get src/battmon.py downloads/battmon.py"

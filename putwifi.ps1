@@ -1,1 +1,1 @@
-pipenv run mpfshell -n -c "open com8; put wifi.py"
+pipenv run mpfshell -n -c "open com8; put src/wifi.py"

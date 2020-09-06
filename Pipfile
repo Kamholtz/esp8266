@@ -9,6 +9,7 @@ verify_ssl = true
 esptool = "*"
 adafruit-ampy = "*"
 mpfshell = "*"
+rshell = "*"
 
 [requires]
 python_version = "3.8"

@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "690980b431546abf5f9147f07980f8236300113412a6fd4564ac1ef7e89fafd6"
+            "sha256": "4d598d1e47a794ad961033d03d0dc4729118c83a82c0e7d2e1b9f80362124f0a"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -69,6 +69,14 @@
             ],
             "version": "==1.6.1"
         },
+        "pyreadline": {
+            "hashes": [
+                "sha256:4530592fc2e85b25b1a9f79664433da09237c1a270e4d78ea5aa3a2c7229e2d1",
+                "sha256:65540c21bfe14405a3a77e4c085ecfce88724743a4ead47c66b84defcf82c32e",
+                "sha256:9ce5fa65b8992dfa373bddc5b6e0864ead8f291c94fbfec05fbd5c836162e67b"
+            ],
+            "version": "==2.1"
+        },
         "pyserial": {
             "hashes": [
                 "sha256:6e2d401fdee0eab996cf734e67773a0143b932772ca8b42451440cfed942c627",
@@ -82,6 +90,19 @@
                 "sha256:c10863aee750ad720f4f43436565e4c1698798d763b63234fb5021b6c616e423"
             ],
             "version": "==0.14.0"
+        },
+        "pyudev": {
+            "hashes": [
+                "sha256:69bb1beb7ac52855b6d1b9fe909eefb0017f38d917cba9939602c6880035b276"
+            ],
+            "version": "==0.22.0"
+        },
+        "rshell": {
+            "hashes": [
+                "sha256:d28e6bd872734c68a2b6169adf43b6f71c745fa66ec89ae88a975e38c1a636b3"
+            ],
+            "index": "pypi",
+            "version": "==0.0.28"
         },
         "six": {
             "hashes": [
