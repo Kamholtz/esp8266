@@ -1,8 +1,11 @@
 import battmon
+import wifi
 # Complete project details at https://RandomNerdTutorials.com
 # https://randomnerdtutorials.com/micropython-esp32-esp8266-dht11-dht22-web-server/
 
 bm = battmon.BatteryMonitor()
+
+wifi.connect_wifi_ben()
 
 def read_sensor():
   global solar_v, batt_v

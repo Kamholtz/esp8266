@@ -1,19 +1,23 @@
+import battmon
+import wifi
 # Complete project details at https://RandomNerdTutorials.com
+# https://randomnerdtutorials.com/micropython-esp32-esp8266-dht11-dht22-web-server/
+
+bm = battmon.BatteryMonitor()
+
+wifi.connect_wifi_ben()
 
 def read_sensor():
-  global temp, hum
-  temp = hum = 0
+  global solar_v, batt_v
+  solar_v = batt_v = 0
   try:
-    sensor.measure()
-    temp = sensor.temperature()
-    hum = sensor.humidity()
-    if (isinstance(temp, float) and isinstance(hum, float)) or (isinstance(temp, int) and isinstance(hum, int)):
-      msg = (b'{0:3.1f},{1:3.1f}'.format(temp, hum))
+    solar_v = bm.read_solar_voltage()
+    batt_v = bm.read_battery_voltage()
+    if (isinstance(solar_v, float) and isinstance(batt_v, float)) or (isinstance(solar_v, int) and isinstance(batt_v, int)):
+      msg = (b'{0:3.1f},{1:3.1f}'.format(solar_v, batt_v))
 
-      # uncomment for Fahrenheit
-      #temp = temp * (9/5) + 32.0
-
-      hum = round(hum, 2)
+      solar_v = round(solar_v, 2)
+      batt_v = round(batt_v, 2)
       return(msg)
     else:
       return('Invalid sensor readings.')
@@ -43,18 +47,18 @@ def web_page():
   </style>
 </head>
 <body>
-  <h2>ESP DHT Server</h2>
+  <h2>Solar Charger Server</h2>
   <p>
-    <i class="fas fa-thermometer-half" style="color:#059e8a;"></i>
-    <span class="dht-labels">Temperature</span>
-    <span>"""+str(temp)+"""</span>
-    <sup class="units">&deg;C</sup>
+    <i class="fas fa-solar-panel" style="color: orange;"></i>
+    <span class="dht-labels">Solar Panel Voltage</span>
+    <span>"""+str(solar_v)+"""</span>
+    <sup class="units">V</sup>
   </p>
   <p>
-    <i class="fas fa-tint" style="color:#00add6;"></i>
-    <span class="dht-labels">Humidity</span>
-    <span>"""+str(hum)+"""</span>
-    <sup class="units">%</sup>
+    <i class="fas fa-battery-three-quarters" style="color: deepskyblue;"></i>
+    <span class="dht-labels">Battery Voltage</span>
+    <span>"""+str(batt_v)+"""</span>
+    <sup class="units">V</sup>
   </p>
 </body>
 </html>"""

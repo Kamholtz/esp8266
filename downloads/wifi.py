@@ -12,3 +12,4 @@ def connect_wifi(essid :str, password : str):
 
 def connect_wifi_ben() -> None:
 	connect_wifi('IPF', 'fuckno1234')
+

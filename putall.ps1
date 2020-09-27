@@ -1,1 +1,1 @@
-pipenv run mpfshell -n -c "open com8; put src/boot.py; put src/battmon.py; put main.py; put wifi.py"
+pipenv run mpfshell -n -c "open com8; put src/boot.py boot.py; put src/battmon.py battmon.py; put src/main.py main.py; put src/wifi.py wifi.py"

@@ -1,1 +1,1 @@
-pipenv run mpfshell -n -c "open com8; put src/battmon.py"
+pipenv run mpfshell -n -c "open com8; put src/battmon.py battmon.py"
