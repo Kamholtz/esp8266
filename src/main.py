@@ -3,6 +3,7 @@ import wifi
 import urequests as requests
 import ujson
 import time
+import machine
 # Complete project details at https://RandomNerdTutorials.com
 # https://randomnerdtutorials.com/micropython-esp32-esp8266-dht11-dht22-web-server/
 
@@ -78,6 +79,15 @@ def web_page():
 </html>"""
   return html
 
+
+
+rtc = machine.RTC()
+rtc.irq(trigger=rtc.ALARM0, wake=machine.DEEPSLEEP)
+
+# check if the device woke from a deep sleep
+if machine.reset_cause() == machine.DEEPSLEEP_RESET:
+    print('Woke from a deep sleep')
+
 while True:
 
   try:
@@ -106,7 +116,11 @@ while True:
   except OSError:
     print ("OSError ECONNABORTED")
 
-  time.sleep(3)
+  # set RTC.ALARM0 to fire after 10 seconds (waking the device)
+  rtc.alarm(rtc.ALARM0, 60000)
+
+  # put the device to sleep
+  machine.deepsleep()
 
 
 
