@@ -8,8 +8,8 @@ class BatteryMonitor:
     SOLAR_MAX_V = 6
 
     def __init__(self):
-        self.sela = Pin(5, Pin.OUT)
-        self.selb = Pin(4, Pin.OUT)
+        self.sela = Pin(4, Pin.OUT)
+        self.selb = Pin(5, Pin.OUT)
         self.selc = Pin(14, Pin.OUT)
         self.charge_en = Pin(12, Pin.OUT)
         self.adc = ADC(0)
@@ -37,12 +37,18 @@ class BatteryMonitor:
         """ Battery voltage is between 0 and 4.2 """
         self.select_battery()
         adc_reading = self.read_adc()
+        volt = adc_reading / BatteryMonitor.ADC_MAX * BatteryMonitor.BATTERY_MAX_V * 1.122
 
-        return adc_reading / BatteryMonitor.ADC_MAX * BatteryMonitor.BATTERY_MAX_V
+        print("Battery ADC: " + str(adc_reading))
+        print("Battery Voltage: " + str(volt))
+        return volt
 
     def read_solar_voltage(self) -> None:
         """ Battery voltage is between 0 and 4.2 """
         self.select_solar_panel()
         adc_reading = self.read_adc()
+        volt = adc_reading / BatteryMonitor.ADC_MAX * BatteryMonitor.SOLAR_MAX_V * 1.037
 
-        return adc_reading / BatteryMonitor.ADC_MAX * BatteryMonitor.SOLAR_MAX_V
+        print("Solar ADC: " + str(adc_reading))
+        print("Solar Voltage: " + str(volt))
+        return volt

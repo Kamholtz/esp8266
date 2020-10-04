@@ -6,13 +6,22 @@ import wifi
 bm = battmon.BatteryMonitor()
 
 wifi.connect_wifi_ben()
+request_count = 0
 
 def read_sensor():
   global solar_v, batt_v
+  global request_count
   solar_v = batt_v = 0
   try:
-    solar_v = bm.read_solar_voltage()
-    batt_v = bm.read_battery_voltage()
+    if request_count % 2 == 1:
+      batt_v = bm.read_battery_voltage()
+      solar_v = bm.read_solar_voltage()
+    else:
+      solar_v = bm.read_solar_voltage()
+      batt_v = bm.read_battery_voltage()
+
+    request_count = request_count + 1
+
     if (isinstance(solar_v, float) and isinstance(batt_v, float)) or (isinstance(solar_v, int) and isinstance(batt_v, int)):
       msg = (b'{0:3.1f},{1:3.1f}'.format(solar_v, batt_v))
 
