@@ -100,7 +100,7 @@ while True:
       "i_value": solar_v,
     })
     print ("Body: " + body)
-    response = requests.post("http://192.168.1.8:5000/measurements", data = body)
+    response = requests.post("http://192.168.1.15:5000/measurements", data = body)
     print("Resp: " + ujson.dumps(response))
 
 
@@ -111,13 +111,13 @@ while True:
       "i_value": batt_v,
     })
     print ("Body: " + body)
-    response = requests.post("http://192.168.1.8:5000/measurements", data = body)
+    response = requests.post("http://192.168.1.15:5000/measurements", data = body)
     print("Resp: " + ujson.dumps(response))
   except OSError:
     print ("OSError ECONNABORTED")
 
   # set RTC.ALARM0 to fire after 10 seconds (waking the device)
-  rtc.alarm(rtc.ALARM0, 60000)
+  rtc.alarm(rtc.ALARM0, 1000)
 
   # put the device to sleep
   machine.deepsleep()

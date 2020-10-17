@@ -15,10 +15,10 @@ class BatteryMonitor:
         self.adc = ADC(0)
 
     def connect_solar_panel(self) -> None:
-        self.charge_en.on()
+        self.charge_en.off()
 
     def disconnect_solar_panel(self) -> None:
-        self.charge_en.off()
+        self.charge_en.on()
 
     def select_solar_panel(self) -> None:
         self.sela.off()
@@ -35,20 +35,24 @@ class BatteryMonitor:
 
     def read_battery_voltage(self) -> None:
         """ Battery voltage is between 0 and 4.2 """
+        self.disconnect_solar_panel()
         self.select_battery()
         adc_reading = self.read_adc()
         volt = adc_reading / BatteryMonitor.ADC_MAX * BatteryMonitor.BATTERY_MAX_V * 1.122
 
         print("Battery ADC: " + str(adc_reading))
         print("Battery Voltage: " + str(volt))
+        self.connect_solar_panel()
         return volt
 
     def read_solar_voltage(self) -> None:
         """ Battery voltage is between 0 and 4.2 """
+        self.disconnect_solar_panel()
         self.select_solar_panel()
         adc_reading = self.read_adc()
         volt = adc_reading / BatteryMonitor.ADC_MAX * BatteryMonitor.SOLAR_MAX_V * 1.037
 
         print("Solar ADC: " + str(adc_reading))
         print("Solar Voltage: " + str(volt))
+        self.connect_solar_panel()
         return volt
