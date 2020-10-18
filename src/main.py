@@ -9,7 +9,7 @@ import machine
 
 bm = battmon.BatteryMonitor()
 
-wifi.connect_wifi_ben()
+connected = wifi.connect_wifi_ben()
 request_count = 0
 solar_v = 0
 batt_v = 0
@@ -88,8 +88,8 @@ rtc.irq(trigger=rtc.ALARM0, wake=machine.DEEPSLEEP)
 if machine.reset_cause() == machine.DEEPSLEEP_RESET:
     print('Woke from a deep sleep')
 
-while True:
-
+if connected:
+  print("Connect to WiFi")
   try:
     read_sensor()
 
@@ -100,7 +100,7 @@ while True:
       "i_value": solar_v,
     })
     print ("Body: " + body)
-    response = requests.post("http://192.168.1.15:5000/measurements", data = body)
+    response = requests.post("http://192.168.1.21:5000/measurements", data = body)
     print("Resp: " + ujson.dumps(response))
 
 
@@ -111,16 +111,16 @@ while True:
       "i_value": batt_v,
     })
     print ("Body: " + body)
-    response = requests.post("http://192.168.1.15:5000/measurements", data = body)
+    response = requests.post("http://192.168.1.21:5000/measurements", data = body)
     print("Resp: " + ujson.dumps(response))
   except OSError:
     print ("OSError ECONNABORTED")
 
-  # set RTC.ALARM0 to fire after 10 seconds (waking the device)
-  rtc.alarm(rtc.ALARM0, 1000)
+# set RTC.ALARM0 to fire after 10 seconds (waking the device)
+rtc.alarm(rtc.ALARM0, 10000)
 
-  # put the device to sleep
-  machine.deepsleep()
+# put the device to sleep
+machine.deepsleep()
 
 
 
